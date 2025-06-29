@@ -29,19 +29,3 @@ variable "backend_alb_sg_name" {
 variable "backend_alb_sg_description" {
   default = "Created backend alb for instances"
 }
-
-variable "mongodb_ports_vpn" {
-  default = [22,27017]
-}
-
-variable "redis_ports_vpn" {
-  default = [22,3306]
-}
-
-variable "mysql_ports_vpn" {
-  default = [22,3306]
-}
-
-variable "rabbitmq_ports_vpn" {
-  default = [22,5672]
-}
