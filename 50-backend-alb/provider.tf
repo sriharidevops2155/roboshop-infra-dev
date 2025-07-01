@@ -2,12 +2,12 @@ terraform {
   required_providers {
     aws = {
       source = "hashicorp/aws"
-      version = "5.99.0"
+      version = "5.98.0"
     }
   }
    backend "s3" {  #Dont save the state file in local and save the state file in below S3 bucket 
     bucket = "daws84s-remote-state-dev-sriharibandi"   
-    key    = "roboshop-dev-backend-alb"
+    key    = "roboshop-dev-50-backend-alb"
     region = "us-east-1"
     encrypt = true
     use_lockfile = true # Enable native S3 locking

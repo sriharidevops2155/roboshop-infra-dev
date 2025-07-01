@@ -6,26 +6,10 @@ variable "environment" {
   default = "dev"
 }
 
-variable "frontend_sg_name" {
-  default = "frontend"
+variable "zone_id" {
+  default = "Z00174153HJ610LT4L6PX"
 }
 
-variable "frontend_sg_description" {
-  default = "Created sg for frontend"
-}
-
-variable "bastion_sg_name" {
-  default = "bastion"
-}
-
-variable "bastion_sg_description" {
-  default = "Created sg bastion instances"
-}
-
-variable "backend_alb_sg_name" {
-  default = "backend-alb"
-}
-
-variable "backend_alb_sg_description" {
-  default = "Created backend alb for instances"
+variable "zone_name" {
+  default = "daws84s.cloud"
 }
