@@ -7,7 +7,7 @@ variable "environment" {
 }
 
 variable "frontend_sg_name" {
-  default = "frontend"
+  default = "frontend_sg"
 }
 
 variable "frontend_sg_description" {
