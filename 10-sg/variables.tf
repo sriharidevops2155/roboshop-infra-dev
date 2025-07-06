@@ -15,7 +15,7 @@ variable "frontend_sg_description" {
 }
 
 variable "bastion_sg_name" {
-  default = "bastion"
+  default = "bastion_sg"
 }
 
 variable "bastion_sg_description" {
@@ -23,7 +23,7 @@ variable "bastion_sg_description" {
 }
 
 variable "backend_alb_sg_name" {
-  default = "backend-alb"
+  default = "backend_alb_sg"
 }
 
 variable "backend_alb_sg_description" {
