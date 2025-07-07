@@ -286,6 +286,15 @@ resource "aws_security_group_rule" "catalogue_vpn_ssh" {#Catalogue is accepting 
   security_group_id = module.catalogue.sg_id # We are creating this rule in calataogue secuirty group 
 }
 
+resource "aws_security_group_rule" "catalogue_bastion_ssh" {#Catalogue is accepting connections from vpn
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id ###It can be either VPN or bastion
+  security_group_id = module.catalogue.sg_id # We are creating this rule in calataogue secuirty group 
+}
+
 resource "aws_security_group_rule" "catalogue_vpn_http" {#Catalogue is accepting connections from http
   type              = "ingress"
   from_port         = 8080
@@ -311,6 +320,15 @@ resource "aws_security_group_rule" "user_vpn_ssh" {#user is accepting connection
   to_port           = 22
   protocol          = "tcp"
   source_security_group_id = module.vpn.sg_id ###It can be either VPN or bastion
+  security_group_id = module.user.sg_id
+}
+
+resource "aws_security_group_rule" "user_bastion_ssh" {#user is accepting connections from vpn
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id ###It can be either VPN or bastion
   security_group_id = module.user.sg_id
 }
 
@@ -342,6 +360,15 @@ resource "aws_security_group_rule" "cart_vpn_ssh" {#cart is accepting connection
   security_group_id = module.cart.sg_id
 }
 
+resource "aws_security_group_rule" "cart_bastion_ssh" {#cart is accepting connections from ssh
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id ###It can be either VPN or bastion
+  security_group_id = module.cart.sg_id
+}
+
 resource "aws_security_group_rule" "cart_vpn_http" {#cart is accepting connections from http
   type              = "ingress"
   from_port         = 8080
@@ -367,6 +394,15 @@ resource "aws_security_group_rule" "shipping_vpn_ssh" {#shipping is accepting co
   to_port           = 22
   protocol          = "tcp"
   source_security_group_id = module.vpn.sg_id ###It can be either VPN or bastion
+  security_group_id = module.shipping.sg_id
+}
+
+resource "aws_security_group_rule" "shipping_bastion_ssh" {#shipping is accepting connections from ssh
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id ###It can be either VPN or bastion
   security_group_id = module.shipping.sg_id
 }
 
@@ -398,6 +434,15 @@ resource "aws_security_group_rule" "payment_vpn_ssh" {#Payment is accepting conn
   security_group_id = module.payment.sg_id
 }
 
+resource "aws_security_group_rule" "payment_bastion_ssh" {#Payment is accepting connections from ssh
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id ##It can be either VPN or bastion
+  security_group_id = module.payment.sg_id
+}
+
 resource "aws_security_group_rule" "payment_vpn_http" {#Payment is accepting connections from http
   type              = "ingress"
   from_port         = 8080
@@ -426,6 +471,15 @@ resource "aws_security_group_rule" "backend_alb_vpn" {#backend is accepting conn
   security_group_id = module.backend_alb.sg_id
 }
 
+resource "aws_security_group_rule" "backend_alb_bastion" {#backend is accepting connections from vpn
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id
+  security_group_id = module.backend_alb.sg_id
+}
+
 resource "aws_security_group_rule" "backend_alb_frontend" {#backend is accepting connections from frontend
   type              = "ingress"
   from_port         = 80
@@ -444,6 +498,16 @@ resource "aws_security_group_rule" "frontend_vpn" {#frontend is accepting connec
   source_security_group_id = module.vpn.sg_id
   security_group_id = module.frontend.sg_id
 }
+
+resource "aws_security_group_rule" "frontend_bastion" {#frontend is accepting connections from vpn
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id
+  security_group_id = module.frontend.sg_id
+}
+
 
 resource "aws_security_group_rule" "frontend_frontend_alb" {#frontend is accepting connections from alb
   type              = "ingress"
