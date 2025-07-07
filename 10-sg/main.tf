@@ -584,7 +584,7 @@ resource "aws_security_group_rule" "vpn_943" {
 }
 
 
-#Backend ALB Accepting connections from my bastion host or port no 80
+/* #Backend ALB Accepting connections from my bastion host or port no 80
 resource "aws_security_group_rule" "backend_alb_bastion" {
   type              = "ingress"
   from_port         = 80
@@ -593,5 +593,5 @@ resource "aws_security_group_rule" "backend_alb_bastion" {
   source_security_group_id = module.bastion.sg_id
   security_group_id = module.backend_alb.sg_id
 }
-
+ */
 
