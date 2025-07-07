@@ -149,6 +149,16 @@ resource "aws_security_group_rule" "mongodb_vpn_ssh" { #Mongo db is accepting co
   security_group_id = module.mongodb.sg_id
 }
 
+resource "aws_security_group_rule" "mongodb_bastion_ssh" { #Mongo db is accepting connections from bastion
+  count = length(var.mongodb_ports_vpn)
+  type              = "ingress"
+  from_port         = var.mongodb_ports_vpn[count.index]
+  to_port           = var.mongodb_ports_vpn[count.index]
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id ###It can be either VPN or bastion
+  security_group_id = module.mongodb.sg_id
+}
+
 resource "aws_security_group_rule" "mongodb_catalogue" {#Mongo db is accepting connections from Catalogue
   type              = "ingress"
   from_port         = 27017
@@ -175,6 +185,16 @@ resource "aws_security_group_rule" "redis_vpn_ssh" {#Redis is accepting connecti
   to_port           = var.redis_ports_vpn[count.index]
   protocol          = "tcp"
   source_security_group_id = module.vpn.sg_id ###It can be either VPN or bastion
+  security_group_id = module.redis.sg_id
+}
+
+resource "aws_security_group_rule" "redis_bastion_ssh" {#Redis is accepting connections from SSH
+  count = length(var.redis_ports_vpn)
+  type              = "ingress"
+  from_port         = var.redis_ports_vpn[count.index]
+  to_port           = var.redis_ports_vpn[count.index]
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id ###It can be either VPN or bastion
   security_group_id = module.redis.sg_id
 }
 
@@ -207,6 +227,16 @@ resource "aws_security_group_rule" "mysql_vpn_ssh" {#mysql is accepting connecti
   security_group_id = module.mysql.sg_id
 }
 
+resource "aws_security_group_rule" "mysql_bastion_ssh" {#mysql is accepting connections from SSH
+  count = length(var.mysql_ports_vpn)
+  type              = "ingress"
+  from_port         = var.mysql_ports_vpn[count.index]
+  to_port           = var.mysql_ports_vpn[count.index]
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id ###It can be either VPN or bastion
+  security_group_id = module.mysql.sg_id
+}
+
 resource "aws_security_group_rule" "mysql_shipping" {#mysql is accepting connections from shipping
   type              = "ingress"
   from_port         = 3306
@@ -224,6 +254,16 @@ resource "aws_security_group_rule" "rabbitmq_vpn_ssh" {#rabbitmq is accepting co
   to_port           = var.rabbitmq_ports_vpn[count.index]
   protocol          = "tcp"
   source_security_group_id = module.vpn.sg_id ###It can be either VPN or bastion
+  security_group_id = module.rabbitmq.sg_id
+}
+
+resource "aws_security_group_rule" "rabbitmq_bastion_ssh" {#rabbitmq is accepting connections from vpn
+  count = length(var.rabbitmq_ports_vpn)
+  type              = "ingress"
+  from_port         = var.rabbitmq_ports_vpn[count.index]
+  to_port           = var.rabbitmq_ports_vpn[count.index]
+  protocol          = "tcp"
+  source_security_group_id = module.bastion.sg_id ###It can be either VPN or bastion
   security_group_id = module.rabbitmq.sg_id
 }
 
