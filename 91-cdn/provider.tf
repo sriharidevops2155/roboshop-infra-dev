@@ -7,7 +7,7 @@ terraform {
   }
    backend "s3" {  #Dont save the state file in local and save the state file in below S3 bucket 
     bucket = "daws84s-remote-state-dev-sriharibandi"   
-    key    = "roboshop-dev-90-components"
+    key    = "roboshop-dev-91-cdn"
     region = "us-east-1"
     encrypt = true
     use_lockfile = true # Enable native S3 locking

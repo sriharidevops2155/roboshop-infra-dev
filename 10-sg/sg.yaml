@@ -28,9 +28,9 @@
   - name: redis_vpn
     purpose: redis should accept traffic on 22,5679 from vpn
   - name: redis_user
-    purpose: redis should accept traffic on 5679 from user
+    purpose: redis should accept traffic on 6739 from user
   - name: redis_cart
-    purpose: redis should accept traffic on 5679 from cart
+    purpose: redis should accept traffic on 6739 from cart
 
   mysql:
   - name: mysql_vpn

@@ -16,7 +16,3 @@ data "aws_ssm_parameter" "public_subnet_ids" {
   name = "/${var.project}/${var.environment}/public_subnet_ids"
 }
 
-/* output "ami_id" {
-   value = data.aws_ami.joindevops.id
-}
- */
